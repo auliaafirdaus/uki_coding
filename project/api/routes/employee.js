@@ -12,4 +12,7 @@ router.get('/:id', EmployeeController.employeeGetById);
 
 router.delete('/:id', EmployeeController.employeeDelete);
 
+router.put('/:id', EmployeeController.employeeUpdate);
+
+
 module.exports = router;

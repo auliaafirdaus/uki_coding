@@ -64,3 +64,18 @@ exports.employeeDelete = (req, res, next) => {
         })
     });
 }
+
+exports.employeeUpdate = (req, res) => {
+    const id = req.params.id;
+    const employee = {
+        name: req.body.name,
+        department: req.body.department
+    };
+    Employee.update({_id:id}, employee,{new:true})
+    .then(result => {
+        res.status(200).json(result);
+    })
+    .catch(err => {
+        res.status(500).json(err);
+    });
+}
