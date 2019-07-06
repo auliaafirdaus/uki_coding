@@ -19,7 +19,7 @@ export class EditComponent implements OnInit {
     ngOnInit() {
       this.route.params.subscribe(params => {
         this.employeeservice.edit(params['id']).subscribe(res => {
-          this.form = res.data;
+          this.form = res['data'];
           console.log(this.form);
       });
     });
