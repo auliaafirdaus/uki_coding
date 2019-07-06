@@ -11,18 +11,41 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) { }
 
-  create(name, description) {
+  create(name, department) {
     const obj = {
       name: name,
-      description: description
+      department: department
     };
-    this.http.post(`${this.uri}/`, obj)
-        .subscribe(res => console.log('Done'));
+    return this.http.post(`${this.uri}/`, obj)
+        .toPromise();
   }
 
   get() {
     return this
            .http
            .get(`${this.uri}`);
-    }
+  }
+
+  delete(id) {
+    return this
+      .http
+      .delete(`${this.uri}/${id}`);
+  }
+
+  edit(id) {
+    return this
+    .http
+    .get(`${this.uri}/${id}`);
+  }
+
+  update(name, department, id) {
+
+    const obj = {
+      name: name,
+      department: department
+    };
+    return this
+      .http
+      .put(`${this.uri}/${id}`, obj);
+  }
 }

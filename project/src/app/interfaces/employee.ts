@@ -1,5 +1,5 @@
 export interface IEmployee {
-    id: Number;
+    _id: Number;
     name: String;
-    description: String;
+    department: String;
 }

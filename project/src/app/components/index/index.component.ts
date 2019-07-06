@@ -8,17 +8,44 @@ import { EmployeeService } from '../../services/employee.service';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
+  public show:boolean = false;
+  employees: IEmployee[];
+  form = {};
+  message:boolean = false;
 
-  employee: IEmployee[];
-
-  constructor(private employeeservice: EmployeeService) { }
+  constructor(private employeeservice: EmployeeService) {
+  }
 
   ngOnInit() {
+    this.get();
+  }
+
+
+  receiveMessage($event) {
+    if (this.message !== $event) {
+      this.get();
+    } else {
+      console.log('gagal');
+    }
+  }
+
+  get() {
     this.employeeservice
       .get()
-      .subscribe((data: IEmployee[]) => {
-      this.employee = data;
-      console.log(this.employee);
+      .subscribe((data:any) => {
+      this.employees= data.data;
     });
   }
+
+  open() {
+    this.show = !this.show;
+  }
+
+  remove(id) {
+    this.employeeservice.delete(id).subscribe((data)=>{
+      console.log("delete success");
+      this.get();
+    });
+  }
+
 }

@@ -1,19 +1,33 @@
-<table class="table table-hover">
-  <thead>
-  <tr>
-      <td>Ad Unit Name</td>
-      <td>Ad Unit Price</td>
-      <td colspan="2">Actions</td>
-  </tr>
-  </thead>
+<div class="form-group row">
+  <div class="col-sm-10">
+    <button type="button" class="btn btn-outline-primary" (click)="open()">New Employee</button>
+  </div>
+</div>
 
-  <tbody>
-      <tr *ngFor="let employee of employees">
-          <!-- <td>{{ employee._id }}</td> -->
-          <td>{{ employee.name }}</td>
-          <td>{{ description.description }}</td>
-          <td><a [routerLink]="['/edit', adunit._id]" class="btn btn-primary">Edit</a></td>
-          <td><a [routerLink]="" class="btn btn-danger">Delete</a></td>
+<app-create *ngIf="show" (someEvent)="receiveMessage($event)"></app-create>
+
+<div class="card">
+  <div class="card-body">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+          <td>#</td>
+          <td>id</td>
+          <td>Name</td>
+          <td>Description</td>
+          <td colspan="2">Actions</td>
       </tr>
-  </tbody>
-</table>
+      </thead>
+      <tbody>
+          <tr *ngFor="let employee of employees; let i = index">
+              <td>{{i + 1}}</td>
+              <td>{{ employee._id }}</td>
+              <td>{{ employee.name }}</td>
+              <td>{{ employee.department }}</td>
+              <td><a [routerLink]="['/edit', employee._id]" class="btn btn-primary btn-sm">Edit</a>
+              <a class="btn btn-outline-danger btn-sm" (click)="remove(employee._id)">Delete</a></td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

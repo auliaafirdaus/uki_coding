@@ -11,16 +11,13 @@ import { IndexComponent } from './components/index/index.component';
 import { EditComponent } from './components/edit/edit.component';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { EmployeeService } from './services/employee.service';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { 
     path: '', 
     redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {
-    path: 'create',
-    component: CreateComponent
+    pathMatch: 'full',
   },
   {
     path: 'edit/:id',
@@ -44,7 +41,8 @@ const routes: Routes = [
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
-    SlimLoadingBarModule
+    SlimLoadingBarModule,
+    FormsModule,
   ],
   providers: [EmployeeService],
   bootstrap: [AppComponent]
