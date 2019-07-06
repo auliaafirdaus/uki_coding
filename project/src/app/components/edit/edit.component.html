@@ -7,23 +7,33 @@
   </nav>
   <div class="card">
     <div class="card-body">
-      <form>
+      <form [formGroup]="angForm" novalidate>
         <div class="form-group">
           <label class="col-md-4">Name</label>
-          <input type="text" class="form-control" name="name" [(ngModel)]="form.name" />
+          <input type="text" class="form-control" name="name" [(ngModel)]="form.name" formControlName="name" #name/>
+        </div>
+        <div *ngIf="angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)" class="alert alert-danger">
+          <div *ngIf="angForm.controls['name'].errors.required">
+            <h6> Name is required. </h6>
+          </div>
         </div>
         <div class="form-group">
           <label class="col-md-4">Department</label>
-          <input type="text" class="form-control" name="department" [(ngModel)]="form.department"/>
+          <input type="text" class="form-control" name="department" [(ngModel)]="form.department" formControlName="department" #department/>
+        </div>
+        <div *ngIf="angForm.controls['department'].invalid && (angForm.controls['department'].dirty || angForm.controls['department'].touched)" class="alert alert-danger">
+          <div *ngIf="angForm.controls['department'].errors.required">
+              <h6>Department is required.</h6>
           </div>
-          <div class="form-group" class="row">
-            <div class="col-sm-2">
-              <button type="submit" class="btn btn-primary btn-sm" (click)="update(form.name, form.department)">Update</button>
-            </div>
-            <div class="col-sm-2">            
-              <button type="submit" class="btn btn-outline-danger btn-sm" (click)="remove()">Delete</button>
-            </div>
+        </div>
+        <div class="form-group" class="row">
+          <div class="col-sm-2">
+            <button type="submit" class="btn btn-primary btn-sm" (click)="update(form.name, form.department)" [disabled]="angForm.pristine || angForm.invalid">Update</button>
           </div>
+          <div class="col-sm-2">            
+            <button type="submit" class="btn btn-outline-danger btn-sm" (click)="remove()">Delete</button>
+          </div>
+        </div>
       </form>
     </div>
   </div>

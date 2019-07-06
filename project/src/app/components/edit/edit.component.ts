@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IEmployee } from '../../interfaces/employee';
 import { EmployeeService } from '../../services/employee.service';
+import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-edit',
@@ -9,20 +11,29 @@ import { EmployeeService } from '../../services/employee.service';
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent implements OnInit {
-
+  angForm: FormGroup;
   employee: any = {};
   form : any = {};
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private employeeservice: EmployeeService,) { }
+    private employeeservice: EmployeeService, private fb: FormBuilder) { 
+      this.createForm()
+    }
 
     ngOnInit() {
       this.route.params.subscribe(params => {
         this.employeeservice.edit(params['id']).subscribe(res => {
           this.form = res['data'];
           console.log(this.form);
+        });
       });
-    });
+    }
+
+  createForm() {
+    this.angForm = this.fb.group({
+      name: ['', Validators.required ],
+      department: ['', Validators.required ]
+   });
   }
 
   update(name, department) {

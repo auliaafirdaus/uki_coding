@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { IEmployee } from '../../interfaces/employee';
 import { EmployeeService } from '../../services/employee.service';
+import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create',
@@ -8,16 +9,25 @@ import { EmployeeService } from '../../services/employee.service';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
-
+  angForm: FormGroup;
   employees: IEmployee[];
   form = {};
 
-  constructor(private employeeservice: EmployeeService) { }
+  constructor(private employeeservice: EmployeeService, private fb: FormBuilder) { 
+    this.createForm()
+  }
 
   ngOnInit() {
   }
   
   @Output() someEvent = new EventEmitter<boolean>();
+
+  createForm() {
+    this.angForm = this.fb.group({
+      name: ['', Validators.required ],
+      department: ['', Validators.required ]
+   });
+  }
 
   callParent() {
     this.someEvent.emit(true);

@@ -12,6 +12,7 @@ import { EditComponent } from './components/edit/edit.component';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { EmployeeService } from './services/employee.service';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { 
@@ -43,6 +44,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     SlimLoadingBarModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   providers: [EmployeeService],
   bootstrap: [AppComponent]
